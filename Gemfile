@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.1"
+ruby "3.0.0"
 
-gem "activerecord-postgres_enum"
+gem "activerecord-postgres_enum", "~> 1.5.0"
 gem "awesome_print"
 gem "bootsnap", require: false
 gem "date_by_example"
@@ -12,7 +12,7 @@ gem "jbuilder"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma"
 gem "simple_form"
-gem "rails", github: "rails/rails"
+gem "rails", "~> 6.1.0"
 gem "table_print"
 gem "turbolinks"
 gem "webpacker"
@@ -34,7 +34,7 @@ group :development do
   gem "annotate"
   gem "erb_lint", require: false
   gem "htmlbeautifier"
-  gem "listen", ">= 3.0.5", "< 3.2"
+  gem "listen", "~> 3.4.0"
   gem "spring"
   gem "spring-commands-rspec"
   gem "spring-watcher-listen"
