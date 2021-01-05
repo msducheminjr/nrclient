@@ -1,0 +1,17 @@
+{
+  "name": "nxns",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-typescript": "*",
+    "@rails/actioncable": "*",
+    "@rails/activestorage": "*",
+    "@rails/ujs": "*",
+    "@rails/webpacker": "*",
+    "turbolinks": "*",
+    "typescript": "*"
+  },
+  "version": "*",
+  "devDependencies": {
+    "webpack-dev-server": "*"
+  }
+}
