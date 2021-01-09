@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.0"
+ruby "2.7.2"
 
 gem "activerecord-postgres_enum", "~> 1.5.0"
 gem "awesome_print"
