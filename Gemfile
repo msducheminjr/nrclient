@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.2"
+ruby "3.0.0"
 
-gem "activerecord-postgres_enum", "~> 1.5.0"
+gem "activerecord-postgres_enum", "~> 1.6.0"
 gem "awesome_print"
 gem "bootsnap", require: false
 gem "date_by_example"
