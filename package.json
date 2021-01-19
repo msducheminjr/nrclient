@@ -12,6 +12,16 @@
   },
   "version": "*",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "prettier": "*",
     "webpack-dev-server": "*"
+  },
+  "scripts": {
+    "eslint": "eslint '*/**/*.{js,ts,tsx}'",
+    "eslint_fix": "eslint '*/**/*.{js,ts,tsx}' --fix"
   }
 }
