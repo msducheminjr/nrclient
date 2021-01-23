@@ -7,9 +7,10 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-import GenericToggle from "src/generic_toggle"
+//import GenericToggle from "src/generic_toggle"
 
 document.addEventListener("turbolinks:load", () => {
+  /*
   document.querySelectorAll(".day-body").forEach((day) => {
     new GenericToggle(
       day,
@@ -34,4 +35,7 @@ document.addEventListener("turbolinks:load", () => {
       }
     ).initHandlers()
   })
+  */
 })
+
+import "controllers"
