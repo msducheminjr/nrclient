@@ -1,9 +1,13 @@
-<section>
+<section
+  data-controller="calendar-toggle text-toggle"
+  data-calendar-toggle-hidden-class="is-hidden"
+  data-calendar-toggle-selected-class="has-text-danger"
+  data-text-toggle-hidden-class="is-hidden">
   <section>
     <div class="columns is-gapless">
       <% @schedule.schedule_days.each do |schedule_day| %>
         <div class="column has-text-centered js--schedule-day"
-             data-associated="day-body:<%= schedule_day.day.by_example("2006-01-02") %>"
+             data-action="click->calendar-toggle#toggle"
              id="day-toggle-<%= schedule_day.day.by_example("2006-01-02") %>">
           <%= schedule_day.day.by_example("Jan 2") %>
         </div>
@@ -17,7 +21,9 @@
         <div class="control">
           <%= text_field_tag("query", "",
                 placeholder: "Search concerts", type: "search",
-                id: "search_query", class: "input") %>
+                id: "search_query", class: "input",
+                "data-text-toggle-target": "filterInput",
+                "data-action": "input->text-toggle#filter") %>
         </div>
       </div>
     </div>
@@ -41,7 +47,7 @@
         </h2>
         <section class="js--day-text" data-day-toggle-target="thingToHide">
           <% schedule_day.concerts.sort_by(&:start_time).each do |concert| %>
-            <article class="concert">
+            <article class="concert" data-text-toggle-target="concert">
               <div class="columns">
                 <div class="column is-size-4 is-one-fifth">
                   <%= concert.start_time.by_example("3:04 PM") %>
