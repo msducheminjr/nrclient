@@ -1,27 +1,32 @@
 import * as React from "react"
-import Row from "./row"
+import VenueBody from "./venue_body"
+import VenueHeader from "./venue_header"
 
 interface VenueProps {
   rows: number
   seatsInRow: number
 }
 
-const Venue = (props: VenueProps) => {
-  // FUTURE: Hardcoded - make dynamic
-  const rowNumbers = [1, 2, 3, 4, 5, 6, 7, 8 ,9, 10]
-  const rowItems = rowNumbers.map(rowNumber => {
-    return (
-      <Row
-        key={rowNumber}
-        rowNumber={rowNumber}
-        seatsInRow={props.seatsInRow}
-      />
-    )
-  })
+const Venue = ({ rows, seatsInRow }) => {
+  const [ticketsToBuy, setTicketsToBuy] = React.useState(1)
+
+  function ticketsToBuyChanged(event: React.SyntheticEvent) {
+    const target = event.target as HTMLSelectElement
+    setTicketsToBuy(parseInt(target.value, 10))
+  }
+
   return (
-    <table className="table">
-      <tbody>{rowItems}</tbody>
-    </table>
+    <>
+      <VenueHeader
+        seatsInRow={seatsInRow}
+        changeHandler={ticketsToBuyChanged}
+      />
+      <VenueBody
+        seatsInRow={seatsInRow}
+        rows={rows}
+        ticketsToBuy={ticketsToBuy}
+      />
+    </>
   )
 }
 

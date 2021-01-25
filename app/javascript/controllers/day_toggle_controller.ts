@@ -5,13 +5,11 @@ export default class DayToggleController extends Controller {
   static targets = ["buttonText", "thingToHide"]
   static values = { visible: Boolean }
 
-/* Explicit declarations do not seem to be necessary in Stimulus 2.0 with TS
   hiddenClass: string
-  thingToHideTarget: HTMLElement
   buttonTextTarget: HTMLElement
   thingToHideTarget: HTMLElement
   visibleValue: boolean
-*/
+
   toggle() {
     this.flipState()
   }

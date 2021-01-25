@@ -2,20 +2,11 @@ import * as React from "react"
 
 interface SeatProps {
   seatNumber: number
-  initialStatus: string
+  status: string
+  clickHandler: (seatNumber: number) => void
 }
 
-const Seat = (props: SeatProps) => {
-  const [status, setStatus] = React.useState(props.initialStatus)
-
-  function changeState(): void {
-    if (status === "open") {
-      setStatus("held")
-    } else if (status === "held") {
-      setStatus("open")
-    }
-  }
-
+export const Seat = ({ seatNumber, status, clickHandler }: SeatProps) => {
   function stateDisplayClass(): string {
     if (status === "open") {
       return "has-background-white"
@@ -26,9 +17,15 @@ const Seat = (props: SeatProps) => {
     }
   }
 
+  function changeState(): void {
+    clickHandler(seatNumber)
+  }
+
   return (
       <td>
-        <span className={`button ${stateDisplayClass()}`} onClick={changeState}>{props.seatNumber}</span>
+        <span className={`button ${stateDisplayClass()}`} onClick={changeState}>
+          {seatNumber}
+        </span>
       </td>
     )
 }
