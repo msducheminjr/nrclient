@@ -1,0 +1,40 @@
+<h2 class="title is-3">
+  <%= schedule_day.day.by_example("Monday, January 2, 2006") %>
+  <div class="button js--day-button"
+       data-action="click->day-toggle#toggle">
+    <span class="background-arrow"
+          data-day-toggle-target="buttonText">
+    </span>
+  </div>
+</h2>
+<% if show %>
+  <section class="js--day-text" data-day-toggle-target="thingToHide">
+    <% schedule_day.concerts.sort_by(&:start_time).each do |concert| %>
+      <article class="concert" data-text-toggle-target="concert">
+        <div class="columns">
+          <div class="column is-size-4 is-one-fifth">
+            <%= concert.start_time.by_example("3:04 PM") %>
+          </div>
+
+          <div class="column is-three-fifths">
+            <div class="name">
+              <div class="is-size-5 has-text-weight-bold">
+                <%= link_to(concert.name, concert) %>
+              </div>
+            </div>
+            <div class="bands">
+              <%= concert.bands.map(&:name).join(", ") %>
+            </div>
+            <div class="genres">
+              <%= concert.genre_tags.split(",").to_sentence %>
+            </div>
+            <div class="has-text-grey has-text-weight-bold">
+              <%= concert.venue.name %>
+            </div>
+          </div>
+          <div class="column is-size-4 is-one-fifth">On Sale</div>
+        </div>
+      </article>
+    <% end %>
+  </section>
+<% end %>
