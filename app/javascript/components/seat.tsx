@@ -1,4 +1,31 @@
 import * as React from "react"
+import styled from "styled-components"
+
+const stateColor = (status: string): string => {
+  if (status === "open") {
+    return "white"
+  } else if (status === "held") {
+    return "green"
+  } else {
+    return "yellow"
+  }
+}
+
+interface SquareProps {
+  status: string
+  className?: string
+}
+
+const ButtonSquare = styled.span.attrs({ className: "button" })<SquareProps>`
+  background-color: ${props => stateColor(props.status)};
+  transition: all 1s ease-in-out;
+  border-width: 3px;
+
+  &:hover {
+    background-color: ${props =>
+      props.status === "open" ? "lightblue" : stateColor(props.status)};
+  }
+`
 
 interface SeatProps {
   seatNumber: number
@@ -7,27 +34,17 @@ interface SeatProps {
 }
 
 export const Seat = ({ seatNumber, status, clickHandler }: SeatProps) => {
-  function stateDisplayClass(): string {
-    if (status === "open") {
-      return "has-background-white"
-    } else if (status === "held") {
-      return "has-background-success"
-    } else {
-      return "has-background-warning"
-    }
-  }
-
-  function changeState(): void {
+  function changeState() {
     clickHandler(seatNumber)
   }
 
   return (
-      <td>
-        <span className={`button ${stateDisplayClass()}`} onClick={changeState}>
-          {seatNumber}
-        </span>
-      </td>
-    )
+    <td>
+      <ButtonSquare status={status} onClick={changeState}>
+        {seatNumber}
+      </ButtonSquare>
+    </td>
+  )
 }
 
 export default Seat
