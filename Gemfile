@@ -16,6 +16,8 @@ gem "rails", "~> 6.1.0"
 gem "table_print"
 gem "turbolinks"
 gem "webpacker"
+# temp cheating using gon for first pass
+gem "gon"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
