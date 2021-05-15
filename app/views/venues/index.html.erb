@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
-
-<h1 class="title is-size-1">Venues</h1>
-
-<table class="table">
+<h1>Venues</h1>
+<table>
   <thead>
     <tr>
       <th>Name</th>
@@ -12,7 +10,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @venues.each do |venue| %>
       <tr>
@@ -27,7 +24,5 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to "New Venue", new_venue_path %>

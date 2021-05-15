@@ -36,14 +36,16 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html do 
-          redirect_to @ticket, notice: "Ticket was successfully created."
+        format.html do
+          redirect_to(@ticket, notice: "Ticket was successfully created.")
         end
-        format.json { render :show, status: :created, location: @ticket }
+
+        format.json { render(:show, status: :created, location: @ticket) }
       else
-        format.html { render :new }
-        format.json do 
-          render json: @ticket.errors, status: :unprocessable_entity
+        format.html { render(:new) }
+
+        format.json do
+          render(json: @ticket.errors, status: :unprocessable_entity)
         end
       end
     end
@@ -52,40 +54,38 @@ class TicketsController < ApplicationController
   # PATCH/PUT /tickets/1
   # PATCH/PUT /tickets/1.json
   def update
-    respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html do 
-          redirect_to @ticket, notice: "Ticket was successfully updated."
-        end
-        format.json { render :show, status: :ok, location: @ticket }
-      else
-        format.html { render :edit }
-        format.json do 
-          render json: @ticket.errors, status: :unprocessable_entity
-        end
-      end
-    end
+    @ticket.toggle_for(current_user)
+    format.html { redirect_to(@ticket.concert) }
+    format.json { render :show, status: :ok, location: @ticket }
   end
 
   # DELETE /tickets/1
   # DELETE /tickets/1.json
   def destroy
     @ticket.destroy
+
     respond_to do |format|
-      format.html do 
-        redirect_to tickets_url, notice: "Ticket was successfully destroyed."
+      format.html do
+        redirect_to(tickets_url, notice: "Ticket was successfully destroyed.")
       end
-      format.json { head :no_content }
+
+      format.json { head(:no_content) }
     end
   end
 
-
-
+  # Use callbacks to share common setup or constraints between actions.
   private def set_ticket
     @ticket = Ticket.find(params[:id])
   end
 
+  # Only allow a list of trusted parameters through.
   private def ticket_params
-    params.require(:ticket).permit(:gig_id, :row, :number, :user_id)
+    params.require(:ticket).permit(
+      :concert_id,
+      :row,
+      :number,
+      :user_id,
+      :status
+    )
   end
 end

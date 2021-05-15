@@ -11,13 +11,12 @@
 # Table name: venues
 #
 #  id            :bigint           not null, primary key
-#  name          :string
 #  description   :text
+#  name          :string
 #  rows          :integer
 #  seats_per_row :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-
 class Venue < ApplicationRecord
 end

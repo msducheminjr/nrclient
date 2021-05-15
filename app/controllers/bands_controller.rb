@@ -36,13 +36,17 @@ class BandsController < ApplicationController
 
     respond_to do |format|
       if @band.save
-        format.html do 
-          redirect_to @band, notice: "Band was successfully created."
+        format.html do
+          redirect_to(@band, notice: "Band was successfully created.")
         end
-        format.json { render :show, status: :created, location: @band }
+
+        format.json { render(:show, status: :created, location: @band) }
       else
-        format.html { render :new }
-        format.json { render json: @band.errors, status: :unprocessable_entity }
+        format.html { render(:new) }
+
+        format.json do
+          render(json: @band.errors, status: :unprocessable_entity)
+        end
       end
     end
   end
@@ -52,13 +56,17 @@ class BandsController < ApplicationController
   def update
     respond_to do |format|
       if @band.update(band_params)
-        format.html do 
-          redirect_to @band, notice: "Band was successfully updated."
+        format.html do
+          redirect_to(@band, notice: "Band was successfully updated.")
         end
-        format.json { render :show, status: :ok, location: @band }
+
+        format.json { render(:show, status: :ok, location: @band) }
       else
-        format.html { render :edit }
-        format.json { render json: @band.errors, status: :unprocessable_entity }
+        format.html { render(:edit) }
+
+        format.json do
+          render(json: @band.errors, status: :unprocessable_entity)
+        end
       end
     end
   end
@@ -67,18 +75,22 @@ class BandsController < ApplicationController
   # DELETE /bands/1.json
   def destroy
     @band.destroy
+
     respond_to do |format|
-      format.html do 
-        redirect_to bands_url, notice: "Band was successfully destroyed."
+      format.html do
+        redirect_to(bands_url, notice: "Band was successfully destroyed.")
       end
-      format.json { head :no_content }
+
+      format.json { head(:no_content) }
     end
   end
 
+  # Use callbacks to share common setup or constraints between actions.
   private def set_band
     @band = Band.find(params[:id])
   end
 
+  # Only allow a list of trusted parameters through.
   private def band_params
     params.require(:band).permit(:name, :description, :genre_tags)
   end

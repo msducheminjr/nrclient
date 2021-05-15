@@ -36,13 +36,14 @@ class GigsController < ApplicationController
 
     respond_to do |format|
       if @gig.save
-        format.html do 
-          redirect_to @gig, notice: "Gig was successfully created."
+        format.html do
+          redirect_to(@gig, notice: "Gig was successfully created.")
         end
-        format.json { render :show, status: :created, location: @gig }
+
+        format.json { render(:show, status: :created, location: @gig) }
       else
-        format.html { render :new }
-        format.json { render json: @gig.errors, status: :unprocessable_entity }
+        format.html { render(:new) }
+        format.json { render(json: @gig.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -52,13 +53,14 @@ class GigsController < ApplicationController
   def update
     respond_to do |format|
       if @gig.update(gig_params)
-        format.html do 
-          redirect_to @gig, notice: "Gig was successfully updated."
+        format.html do
+          redirect_to(@gig, notice: "Gig was successfully updated.")
         end
-        format.json { render :show, status: :ok, location: @gig }
+
+        format.json { render(:show, status: :ok, location: @gig) }
       else
-        format.html { render :edit }
-        format.json { render json: @gig.errors, status: :unprocessable_entity }
+        format.html { render(:edit) }
+        format.json { render(json: @gig.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -67,21 +69,28 @@ class GigsController < ApplicationController
   # DELETE /gigs/1.json
   def destroy
     @gig.destroy
+
     respond_to do |format|
-      format.html do 
-        redirect_to gigs_url, notice: "Gig was successfully destroyed."
+      format.html do
+        redirect_to(gigs_url, notice: "Gig was successfully destroyed.")
       end
-      format.json { head :no_content }
+
+      format.json { head(:no_content) }
     end
   end
 
-
+  # Use callbacks to share common setup or constraints between actions.
   private def set_gig
     @gig = Gig.find(params[:id])
   end
 
+  # Only allow a list of trusted parameters through.
   private def gig_params
     params.require(:gig).permit(
-        :band_id, :concert_id, :order, :duration_minutes)
+      :band_id,
+      :concert_id,
+      :order,
+      :duration_minutes
+    )
   end
 end
