@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>North By North South</title>
+    <title>North By North East</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
-    <script defer="true"
-            src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-    <%= javascript_pack_tag("application") %>
-    <%= javascript_pack_tag("hello_typescript") %>
+    <%= stylesheet_pack_tag(
+          "application",
+          media: "all",
+          "data-turbolinks-track": "reload"
+        ) %>
+    <%= javascript_pack_tag("application", "data-turbolinks-track": "reload") %>
   </head>
-
   <body>
-    <section class="section">
-      <div class="container">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-        <%= yield %>
+    <section class="py-12 px-6">
+      <%= render "layouts/nav" %>
+      <div class="container mx-auto">
+        <div class="mt-6">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
       </div>
     </section>
   </body>

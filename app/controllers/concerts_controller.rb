@@ -36,14 +36,16 @@ class ConcertsController < ApplicationController
 
     respond_to do |format|
       if @concert.save
-        format.html do 
-          redirect_to @concert, notice: "Concert was successfully created."
+        format.html do
+          redirect_to(@concert, notice: "Concert was successfully created.")
         end
-        format.json { render :show, status: :created, location: @concert }
+
+        format.json { render(:show, status: :created, location: @concert) }
       else
-        format.html { render :new }
-        format.json do 
-          render json: @concert.errors, status: :unprocessable_entity
+        format.html { render(:new) }
+
+        format.json do
+          render(json: @concert.errors, status: :unprocessable_entity)
         end
       end
     end
@@ -54,14 +56,16 @@ class ConcertsController < ApplicationController
   def update
     respond_to do |format|
       if @concert.update(concert_params)
-        format.html do 
-          redirect_to @concert, notice: "Concert was successfully updated."
+        format.html do
+          redirect_to(@concert, notice: "Concert was successfully updated.")
         end
-        format.json { render :show, status: :ok, location: @concert }
+
+        format.json { render(:show, status: :ok, location: @concert) }
       else
-        format.html { render :edit }
-        format.json do 
-          render json: @concert.errors, status: :unprocessable_entity
+        format.html { render(:edit) }
+
+        format.json do
+          render(json: @concert.errors, status: :unprocessable_entity)
         end
       end
     end
@@ -71,22 +75,31 @@ class ConcertsController < ApplicationController
   # DELETE /concerts/1.json
   def destroy
     @concert.destroy
+
     respond_to do |format|
-      format.html do 
-        redirect_to concerts_url, notice: "Concert was successfully destroyed."
+      format.html do
+        redirect_to(concerts_url, notice: "Concert was successfully destroyed.")
       end
-      format.json { head :no_content }
+
+      format.json { head(:no_content) }
     end
   end
 
+  # Use callbacks to share common setup or constraints between actions.
   private def set_concert
-    @concert = Concert.find(params[:id])
+    @concert = Concert.includes(:tickets).find(params[:id])
   end
 
+  # Only allow a list of trusted parameters through.
   private def concert_params
     params.require(:concert).permit(
-        :name, :description,
-        :start_time, :venue_id,
-        :genre_tags, :ilk, :access)
+      :name,
+      :description,
+      :start_time,
+      :venue_id,
+      :genre_tags,
+      :ilk,
+      :access
+    )
   end
 end

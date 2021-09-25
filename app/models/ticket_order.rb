@@ -11,16 +11,13 @@
 # Table name: ticket_orders
 #
 #  id               :bigint           not null, primary key
-#  concert_id       :bigint
+#  count            :integer          default(0)
+#  status           :integer          default(0)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  status           :integer          default(0)
-#  count            :integer          default(0)
+#  concert_id       :bigint           not null
 #  shopping_cart_id :integer
 #
-
 class TicketOrder < ApplicationRecord
   belongs_to :concert
-  belongs_to :shopping_cart
-  has_many :tickets
 end

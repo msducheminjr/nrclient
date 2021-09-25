@@ -7,7 +7,10 @@
 # Visit http://www.pragmaticprogrammer.com/titles/nrclient for more book information.
 #---
 class ApplicationJob < ActiveJob::Base
-  # retry_on ActiveRecord::Deadlocked
-
-  # discard_on ActiveJob::DeserializationError
+  # Automatically retry jobs that encountered a deadlock
 end
+
+# retry_on ActiveRecord::Deadlocked
+# Most jobs are safe to ignore if the underlying records are no longer
+# available
+# discard_on ActiveJob::DeserializationError

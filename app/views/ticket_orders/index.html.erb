@@ -1,15 +1,12 @@
 <p id="notice"><%= notice %></p>
-
-<h1 class="title is-size-1">Ticket Orders</h1>
-
-<table class="table">
+<h1>Ticket Orders</h1>
+<table>
   <thead>
     <tr>
       <th>Concert</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @ticket_orders.each do |ticket_order| %>
       <tr>
@@ -21,7 +18,5 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to "New Ticket Order", new_ticket_order_path %>
