@@ -18,6 +18,9 @@ class ConcertsController < ApplicationController
   # GET /concerts/1
   # GET /concerts/1.json
   def show
+    if params[:inline]
+      render(@concert)
+    end
   end
 
   # GET /concerts/new
@@ -56,9 +59,7 @@ class ConcertsController < ApplicationController
   def update
     respond_to do |format|
       if @concert.update(concert_params)
-        format.html do
-          redirect_to(@concert, notice: "Concert was successfully updated.")
-        end
+        format.html { render(@concert) }
 
         format.json { render(:show, status: :ok, location: @concert) }
       else
