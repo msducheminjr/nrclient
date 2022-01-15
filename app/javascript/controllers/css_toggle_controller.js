@@ -1,21 +1,8 @@
-import { Controller } from "@hotwired/stimulus"
+import CssParent from "./css_parent"
 
-export default class extends Controller {
+export default class extends CssParent {
   static classes = ["css"]
   static targets = ["elementToChange"]
-  static values = { status: Boolean }
-
-  toggle() {
-    this.flipState()
-  }
-
-  flipState() {
-    this.statusValue = !this.statusValue
-  }
-
-  statusValueChanged() {
-    this.updateCssClass()
-  }
 
   updateCssClass() {
     for (const oneCssClass of this.cssClasses) {

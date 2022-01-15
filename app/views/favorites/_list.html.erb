@@ -5,14 +5,23 @@
       data-css-toggle-status-value="true">
     <div class="text-3xl font-bold">
       Favorite Concerts
-      <button class="<%= SimpleForm.button_class %> py-1 text-xl font-semibold"
-          data-controller="text-toggle"
-          data-text-toggle-target="elementWithText"
-          data-text-toggle-status-value="false"
-          data-text-toggle-off-value="Hide"
-          data-text-toggle-on-value="Show"
-          data-action="click->css-toggle#toggle click->text-toggle#toggle">
-      </button>
+      <span class="blue-hover">
+        <button class="<%= SimpleForm.button_class %>"
+            data-controller="css-flip"
+            data-css-flip-status-value="true"
+            data-css-flip-off-class="is-closed"
+            data-css-flip-on-class="is-open"
+            data-action="click->css-toggle#toggle click->css-flip#toggle">
+            <%= image_tag(
+                "chevron-right.svg",
+                width: 25,
+                height: 25,
+                # start with is-open to avoid initial transition
+                class: "inline my-2 slow-transition is-open",
+                data: { css_flip_target: "elementToChange" }
+                ) %>
+        </button>
+      </span>
     </div>
     <div data-css-toggle-target="elementToChange">
       <div class="text-xl font-bold" id="no-favorites">

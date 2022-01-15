@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+.slow-transition {
+  transition: all 0.5s ease-in-out;
+}
+
+ .is-open {
+  transform: rotate(90deg);
+}
+
+.is-closed {
+  transform: rotate(0deg);
+}
+
+.blue-hover {
+  transition: all 0.3s ease-in-out;
+}
+
+.blue-hover:hover {
+  background-color: blue;
+}
