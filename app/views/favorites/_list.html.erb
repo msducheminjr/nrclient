@@ -1,7 +1,7 @@
 <%= turbo_frame_tag("favorite-concerts") do %>
   <section class="my-4"
       data-controller="css-toggle"
-      data-css-toggle-css-class="hidden"
+      data-css-toggle-css-class="shrink"
       data-css-toggle-status-value="true">
     <div class="text-3xl font-bold">
       Favorite Concerts
@@ -17,13 +17,13 @@
                 width: 25,
                 height: 25,
                 # start with is-open to avoid initial transition
-                class: "inline my-2 slow-transition is-open",
+                class: "inline mb-2 slow-transition is-open",
                 data: { css_flip_target: "elementToChange" }
                 ) %>
         </button>
       </span>
     </div>
-    <div data-css-toggle-target="elementToChange">
+    <div data-css-toggle-target="elementToChange" class="resizer">
       <div class="text-xl font-bold" id="no-favorites">
         <% if current_user.favorites.empty? %>
           No favorite concerts yet
