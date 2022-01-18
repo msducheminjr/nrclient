@@ -38,6 +38,14 @@ class Concert < ApplicationRecord
 
   validates :name, presence: true
 
+  def self.search(query)
+    joins(:bands)
+    .where("concerts.name ILIKE ?", "%#{query}%")
+    .or(Concert.where("concerts.genre_tags ILIKE ? ", "%#{query}%"))
+    .or(Concert.joins(:bands).where("bands.name ILIKE ?", "%#{query}%"))
+    .uniq
+  end
+
   def start_day
     start_time.to_date
   end
