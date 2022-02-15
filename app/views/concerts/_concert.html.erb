@@ -31,18 +31,16 @@
         <br>
         <br>
         <div class="flex">
-          <% if current_user %>
-            <% if current_user %>
-              <%= link_to(
-                    "Edit",
-                    edit_concert_path(concert),
-                    class: SimpleForm.button_class
-                  ) %>
-            <% end %>
-            <% if current_user.favorite(concert) %>
+          <% if user %>
+            <%= link_to(
+                  "Edit",
+                  edit_concert_path(concert),
+                  class: SimpleForm.button_class
+                ) %>
+            <% if user.favorite(concert) %>
               <%= button_to(
                     "Remove Favorite",
-                    favorite_path(id: current_user.favorite(concert)),
+                    favorite_path(id: user.favorite(concert)),
                     method: :delete,
                     form: { data: { turbo_frame: "favorite-concerts" } },
                     class: SimpleForm.button_class

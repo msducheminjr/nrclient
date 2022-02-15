@@ -20,7 +20,7 @@ class ConcertsController < ApplicationController
   # GET /concerts/1.json
   def show
     if params[:inline]
-      render(@concert)
+      render(@concert, user: current_user)
     end
   end
 
@@ -41,13 +41,15 @@ class ConcertsController < ApplicationController
     respond_to do |format|
       if @concert.save
         format.html do
-          redirect_to(@concert, notice: "Concert was successfully created.")
+          redirect_to(
+            @concert,
+            locals: { user: current_user },
+            notice: "Concert was successfully created."
+          )
         end
-
         format.json { render(:show, status: :created, location: @concert) }
       else
         format.html { render(:new) }
-
         format.json do
           render(json: @concert.errors, status: :unprocessable_entity)
         end
@@ -60,7 +62,9 @@ class ConcertsController < ApplicationController
   def update
     respond_to do |format|
       if @concert.update(concert_params)
-        format.html { render(@concert) }
+        format.html do
+          render(@concert, locals: { user: current_user })
+        end
 
         format.json { render(:show, status: :ok, location: @concert) }
       else

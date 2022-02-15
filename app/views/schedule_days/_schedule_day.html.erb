@@ -16,7 +16,7 @@
   <% if show %>
     <section data-css-toggle-target="elementToChange" class="js--day-text">
       <% schedule_day.concerts.sort_by(&:start_time).each do |concert| %>
-        <%= render(concert) %>
+        <%= render(concert, user: current_user) %>
       <% end %>
     </section>
   <% end %>
