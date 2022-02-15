@@ -1,21 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
+import { createConsumer } from "@rails/actioncable"
 
 export default class extends Controller {
   static targets = ["concert"]
 
   connect() {
-    setInterval(() => this.updateData(), 1000 * 60)
+    if (this.channel) {
+      return
+    }
+    this.started = true
+    this.channel = this.createChannel(this)
   }
 
-  async updateData() {
-    const response = await fetch("/sold_out_concerts")
-    const jsonString = await response.text()
-    const jsonObject = JSON.parse(jsonString)
-    const soldOutConcertIds = jsonObject["sold_out_concert_ids"].map((id) => id.toString())
+  createChannel(source) {
+    return createConsumer().subscriptions.create("ScheduleChannel", {
+      received({ soldOutConcertIds }) {
+        source.updateData(soldOutConcertIds)
+      }
+    })
+  }
+
+  updateData(soldOutConcertIds) {
     this.concertTargets.forEach((concertElement) => {
-      concertElement.dataset.concertSoldOutValue = soldOutConcertIds.includes(
-        concertElement.dataset.concertIdValue
-      )
+      concertElement.dataset.concertSoldOutValue = soldOutConcertIds
+        .includes(parseInt(concertElement.dataset.concertIdValue, 10))
+        .toString()
     })
   }
 }

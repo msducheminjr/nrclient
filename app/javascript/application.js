@@ -1,7 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-
+import "channels"
 /*
   This listens for the turbo:before-stream-render event and performs the animation
   before removing the turbo frame from the DOM. The default behavior would remove
