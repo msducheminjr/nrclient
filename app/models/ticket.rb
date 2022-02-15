@@ -54,4 +54,8 @@ class Ticket < ApplicationRecord
       self.user == user ? "bg-green-600" : "bg-red-500"
     end
   end
+
+  def to_concert_h
+    {id: id, row: row, number: number, status: status}
+  end
 end
