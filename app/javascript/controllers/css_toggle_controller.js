@@ -6,7 +6,7 @@ export default class extends CssParent {
 
   updateCssClass() {
     for (const oneCssClass of this.cssClasses) {
-      this.elementToChangeTarget.classList.toggle(oneCssClass, !this.statusValue)
+      this.elementToChangeTarget.classList.toggle(oneCssClass, this.statusValue)
     }
   }
 }
